@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Adresse{% endblock %}
+
+{% block body %}
+  {% include "account/navAccount.html.twig" %}
+  <div class="col-lg-8 col-md-12 mt-4">
+    <h3>Ajouter une nouvelle Adresse</h3>
+    <a href="{{ path('address_index') }}">Retour à la liste</a>
+    <br>
+
+    {{ include('address/form.html.twig') }}
+  </div>
+  {# fermeture div col row #}
+</div>
+{# fermeture div class container #}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande
+{% endblock %}
+
+{% block body %}
+<div class="container order-style mt-4 ">
+	<p class=" title mb-4 text-center"> <i class="fas fa-check"></i> Confirmation de commande</p>
+
+	<p class=" order-font-size px-2">
+		Bonjour
+		<strong>{{order.user.lastname}}
+			{{order.user.name}}</strong>,
+		<br><br>
+		Nous vous remercions pour votre commande n°<strong>{{order.reference}}</strong>.
+		<br><br>
+		Une confirmation vient de vous être envoyé par mail à l'adresse
+		<strong>{{order.user.email}}</strong>.
+		<br><br>
+		Votre commande sera livrée par
+		<strong>{{order.carrierName}}</strong>
+		à l'adresse suivante :
+		<br><br>
+		{{order.delivery|raw}}
+		<hr>
+		Pour suivre votre commande, rendez-vous dans votre
+		<a href="{{ path('account_order')}}">compte</a>
+	</p>
+	{# {{ dump(order) }} #}
+</div>
+
+{% endblock %}

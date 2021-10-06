@@ -1,0 +1,55 @@
+<div>
+  <h3 class="text-center">
+    Bienvenue
+    <span style="color:blue;">{{app.user.lastname}}
+      {{app.user.name}}
+    </span>
+    {% if is_granted('ROLE_ADMIN') %}
+      - Administrateur -
+    {% else %}
+      sur votre espace personnel
+    {% endif %}
+
+  </h3>
+  <hr>
+</div>
+
+<div class="container-fluid text-center mt-5">
+
+  {% for message in app.flashes('info') %}
+    <div class="alert alert-success">
+      {{ message }}
+    </div>
+  {% endfor %}
+
+  {# Afin de voir toutes les variables disponibles pour twig, j'utilise #}
+  {# {{dump(app.user)}} #}
+
+  <div class="row">
+    <div class="col-lg-4 col-md-12">
+
+      {% if is_granted('ROLE_ADMIN') %}
+        <div class="account-item">
+          <a href="/admin">Espace administration</a>
+        </div>
+        <div class="account-item">
+          <i class="fas fa-unlock-alt"></i>
+          <a href="{{ path ('edit-password') }}">Mot de passe</a>
+        </div>
+      {% else %}
+
+        <div class="account-item">
+          <i class="fas fa-shopping-bag"></i>
+          <a href="{{ path ('account_order')}}">
+            Mes commandes</a>
+        </div>
+        <div class="account-item">
+          <i class="far fa-address-book"></i>
+          <a href="{{ path ('address_index')}}">Mes adresses</a>
+        </div>
+        <div class="account-item">
+          <i class="fas fa-unlock-alt"></i>
+          <a href="{{ path ('edit-password') }}">Mot de passe</a>
+        </div>
+      {% endif %}
+    </div>

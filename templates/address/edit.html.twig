@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer Adresse{% endblock %}
+
+{% block body %}
+  {% include "account/navAccount.html.twig" %}
+
+  {% if app.user.id != address.user.id %}
+
+    <h1>adresse introuvable</h1>
+  {% else %}
+    <div class="col-lg-8 col-md-12">
+      <h3>Modifier mon Adresse</h3>
+      <a href="{{ path('address_index') }}">Retour a la liste</a>
+
+      {{ include('address/form.html.twig', {'button_label': 'Enregistrer'}) }}
+      ou
+
+      {{ include('address/delete_form.html.twig') }}
+    </div>
+
+    {# fermeture div col row #}
+  </div>
+  {# fermeture div class container #}
+</div>
+{% endif %}
+{% endblock %}

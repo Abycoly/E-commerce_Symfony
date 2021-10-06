@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresses{% endblock %}
+
+{% block body %}
+
+{% include "account/navAccount.html.twig" %}
+
+{% if app.user.id != address.user.id %}
+
+<h1>adresse introuvable</h1>
+{% else %}
+
+{# {{app.user.id}} {{address.user.id}} #}
+<div class="col-lg-8 col-md-12 mt-4 order-style my-3 py-5">
+	<h3>Adresse enregistrée en tant que : <strong>{{address.label}}</strong></h3>
+	<hr>
+	<div class="adress-show">
+		<strong>Nom et numéro de voie : </strong>{{ address.address }} <br>
+		<strong>Ville : </strong>{{ address.city }} <br>
+		<strong>Code Postal : </strong>{{ address.postalCode }} <br>
+		<strong>Pays : </strong>{{ address.country }} <br>
+		<strong>Numéro de Téléphone : </strong>{{ address.phoneNumber }} <br><br>
+	</div>
+	<!-- <table class="table">
+		<tbody>
+			<tr>
+				<th>Nom et numéro de voie</th>
+				<td>{{ address.label }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ address.city }}</td>
+			</tr>
+			<tr>
+				<th>Code Postal
+				</th>
+				<td>{{ address.postalCode }}</td>
+			</tr>
+			<tr>
+				<th>Pays</th>
+				<td>{{ address.country }}</td>
+			</tr>
+			<tr>
+				<th>Numéro de Téléphone</th>
+				<td>{{ address.phoneNumber }}</td>
+			</tr>
+		</tbody>
+	</table> -->
+
+	<a href="{{ path('address_index') }}">Retour à la liste</a> | <a
+		href="{{ path('address_edit', {'id': address.id}) }}">Editer</a> <br>
+	<br><br>
+	{{ include('address/delete_form.html.twig') }}
+
+</div>
+
+{# fermeture div col row #}
+</div>
+{# fermeture div class container #}
+</div>
+{% endif %}
+{% endblock %}

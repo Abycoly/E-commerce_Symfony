@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+{% block body %}
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">{{categories}}</h1>
+      <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
+      </p>
+    </div>
+  </div>
+  {% for message in app.flashes('notice') %}
+    <div class="alert alert-info text-center w-25 mx-auto">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+  <div class="row product-container container-fluid justify-content-center ml-0 ">
+    {% for product in categories.products %}
+      <div class="col-lg-2 col-md-6 col-sm-12">
+        {% include "partials/product.html.twig" %}
+      </div>
+    {% endfor %}
+  </div>
+  {# modal #}
+  <div id="ma_modal">
+    <div id="modal-image" class="modal-image">
+      <i class="far fa-times-circle"></i><img src="../../images/people-2561845_1920.jpg" alt="" class="mx-auto">
+      <div>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  {# fin test #}
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block style %}{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid px-0">
+	<div class="jumbotron ">
+		<h1 class="display-4">Galerie Video Inspiration</h1>
+		<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+			featured content or information.</p>
+		<hr class="my-4">
+		<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+	</div>
+</div>
+
+<div class="container-fluid">
+	{# <div class="row">
+		<div class="col-3"> #}
+			<div class="">
+				<h4 class="ml-4">Recherche</h4>
+				<div class="container-fluid ml-2 d-flex" style="max-width: 25%; margin-right: unset;">
+					{{form_start(form,{attr:{class: 'search d-flex'} } )}}
+
+					{{form_row(form.q) }}
+
+					<button type="submit" class="btn-sm btn-info search-video ml-3"
+						style="height: 30px;">Filtrer</button>
+
+					{{form_end(form)}}
+				</div>
+				{% if videos.params.q is defined %}
+				<br>
+				<hr>
+				<strong class="mx-4">Produits liés à votre recherche : </strong>
+				<br><br>
+				<div class="d-flex w-100 mx-4">
+					{% for video in videos %}
+					{% for item in video.product %}
+					<div style="min-width: 300px; border: solid 1px lightgrey; margin-right: 30px;">
+						<img src="../../uploads/{{item.media}}" alt="" style="width: 60px; height: 60px">
+						<a class="ml-2" href="{{ path ('product_detail', {'slug' : item.slug})}}">{{item.title}}</a>
+					</div>
+					{% endfor %}
+					{% endfor %}
+				</div>
+				{% endif %}
+
+			</div>
+			<div class=" row d-flex my-auto py-3">
+				{% for video in videos %}
+				<div class="col-sm-12 col-md-12 col-lg-4 mt-4" id="list_video">
+					<img class="img_video mb-4" src="../../uploadsImgVideo/{{video.image}}" height="100%" width="100%"
+						alt="" style="max-height: 259px; ;">
+					<img src="../../images/play_btn.png" class="play_btn" onclick="playVideo('{{video.url}}')">
+
+				</div>
+				{% endfor %}
+				{% if videos is empty %}
+				<div class="col-sm-12 col-md-12 col-lg-12 mt-4">
+					<p class="noResult border rounded p-5 text-center float-center mx-auto">Aucun résultat correspondant
+						à la recherche : <strong>{{form.vars.value.q}}</strong>
+					</p>
+				</div>
+				{% endif %}
+			</div>
+
+		</div>
+
+		<div class="video-player" id="videoPlayer">
+			<iframe width="100%" height="600px" id="myVideo" src="https://www.youtube.com/embed/HxbHa2R_nrg"
+				title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen="allowfullscreen"></iframe>
+			<img src="../../images/close_btn2.jpg" class="close-btn" onclick="stopVideo()">
+
+		</div>
+
+		{% endblock %}

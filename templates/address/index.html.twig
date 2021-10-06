@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresses
+{% endblock %}
+
+{% block body %}
+
+{# {{ dump() }} #}
+{% include "account/navAccount.html.twig" %}
+
+<div class="col-lg-8 col-md-12">
+
+	<h4 style="visibility: visible; text-align:center; margin-top: 15px">Mes adresses enregistrées</h4><br>
+	<a href="{{ path('address_new') }}">Ajouter une nouvelle Adresse</a>
+
+	<div class="row mt-2">
+		{% for address in addresses %}
+		<div class="col-lg-6 col-md-12 mt-2 order-style">
+			<div id="card-address" class="card p-3">
+				<div class="card-body">
+					<h5 class="card-title">
+						<b>{{address.label}}</b>
+					</h5><br>
+					<p class="card-text">
+						{{address.firstname}}
+						{{address.lastname}}<br>
+						{{address.compagny}}
+						{{address.address}}<br>
+						{{address.postalCode }}
+						-
+						{{address.city}}
+						-
+						{{address.country}}<br>
+						{{address.phoneNumber}}<br>
+					</p>
+					<a href="{{ path('address_show', {'id': address.id}) }}">Voir</a>
+					|
+					<a href="{{ path('address_edit', {'id': address.id}) }}">Editer</a>
+				</div>
+
+			</div>
+		</div>
+
+		{% else %}
+		<div id="card-address" class="card p-3">
+			<p colspan="7">
+				Vous n'avez pas encore ajouté d'adresse.
+			</p>
+		</div>
+		{% endfor %}
+
+	</div>
+
+</div>
+{# fermeture div col row #}
+</div>
+{# fermeture div class container #}
+</div>
+{% endblock %}

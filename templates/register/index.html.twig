@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}INSCRIPTION
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    {% for message in app.flashes('info') %}
+      <div class="alert alert-success w-50 mx-auto">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+    {% for message in app.flashes('alert') %}
+      <div class="alert alert-danger">
+        {{ message }}
+      </div>
+    {% endfor %}
+    <h1 class="text-center">Inscription</h1>
+    {{form(form)}}
+      <a href="{{ path ('conditions')}}">Lire les conditions générales d'utilisation</a>
+      <hr>
+      <p class="text-center">Déja inscrit?
+        <a href="{{path ('app_login')}}">Se connecter</a>
+      </p>
+    </div>
+  {% endblock %}

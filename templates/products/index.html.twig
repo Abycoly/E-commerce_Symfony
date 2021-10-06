@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits
+{% endblock %}
+{% block body %}
+  {# {{dump()}} #}
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Tous nos produits</h1>
+      <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
+      </p>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    {% for message in app.flashes('notice') %}
+      <div class="alert alert-info text-center w-25 mx-auto">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+    <div class="row mt-2 js-filter">
+      <div class="col-lg-3 col-md-12 order-style py-5 js-filter-form" style="background-color: beige;">
+        <h3>Filtrer</h3>
+        {{form_start(form,{attr:{class: 'filter'} } )}}
+
+        {{form_row(form.q) }}
+
+        <h4>Catégories</h4>
+        {{form_row(form.categories) }}
+
+        <h4>Prix</h4>
+        <div class="row">
+          <div class="col-md-6">
+            {{form_row(form.min) }}
+          </div>
+          <div class="col-md-6">
+            {{form_row(form.max) }}
+          </div>
+        </div>
+        <!-- <div id="price-slider"></div> -->
+        <button type="submit" class="btn btn-block bg-dark btn-info w-75 mx-auto mt-4">Filtrer</button>
+        {{form_end(form)}}
+      </div>
+      <div class="col-lg-9 col-md-12">
+        <h3 class="m-5">Nos Produits</h3>
+        <div class="row product-container js-filter-content">
+          {% for product in products %}
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 ml-5 mx-auto">
+              <!-- <div class="col-lg-3 col-md-6 col-sm-12"> -->
+              {% include "partials/product.html.twig" %}
+            </div>
+          {% endfor %}
+          {% if products is empty %}
+            <div class="col-sm-12 col-md-12 col-lg-12 mt-4">
+              <p class="noResult border rounded p-5 text-center float-center mx-auto">Aucun résultat correspondant à cette recherche
+              </p>
+            </div>
+          {% endif %}
+        </div>
+        <div class="mt-4 d-flex justify-content-center js-filter-pagination">
+          {{knp_pagination_render(products,'partials/pagination.html.twig') }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {# modal #}
+  <div id="ma_modal">
+    <div id="modal-image" class="modal-image">
+      <i class="far fa-times-circle"></i><img src="../../images/people-2561845_1920.jpg" alt="" class="mx-auto">
+      <div>
+	  <p></p>
+	  </div>
+    </div>
+  </div>
+  {# fin test #}
+{% endblock %}

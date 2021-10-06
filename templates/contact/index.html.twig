@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block body %}
+
+  <div class="container">
+    <h2>Nous contacter</h2>
+    <p>N'hésitez pas à contacter notre équipe, nous vous répondrons dans les meilleurs délais</p>
+    {% for message in app.flashes('notice') %}
+      <div class="alert alert-info text-center">{{message}}</div>
+    {% endfor %}
+
+    <br>
+    <div class="row">
+      <div class="col-8 col-sm-12 col-lg-8">
+        {{form(form)}}
+        </div>
+        <div class="col-4 col-sm-12 col-lg-4">
+          <strong>A.C Beauty</strong>
+          <hr>
+          06 14 08 73 38
+          <br>
+          10 avenue des champs
+          <br>
+          75010 Paris
+          <br>
+          <br>
+          contact@acbeauty.fr
+        </div>
+      </div>
+
+    </div>
+
+  {% endblock %}

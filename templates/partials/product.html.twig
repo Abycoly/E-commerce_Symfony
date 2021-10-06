@@ -1,0 +1,31 @@
+<div class="product mt-4">
+  <div class="product_img">
+    <img class="img_product shadow" id="img_product" src="/uploads/{{product.media}}" alt="product_img1">
+    <div class="product_action_box">
+      <ul class="list_none pr_action_btn">
+        {% if product.quantity > 0 %}
+          <li class="add-to-cart">
+            <a id="btn-action-icon-add" onclick="animationIconCart()" href="{{path ('cart-add', {'id': product.id})}}">
+              <i class="fas fa-cart-plus"></i>
+            </a>
+          </li>
+        {% endif %}
+        <li>
+          <a href="{{ path ('product_detail', {'slug' : product.slug})}}" class="">
+            <i class="fas fa-sign-in-alt"></i>
+          </a>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="product_info">
+  {% if product.quantity == 0 %}
+    <div class="badge badge-pill badge-danger">Indisponible</div>
+  {% endif %}
+  		<h6 class="product_title">{{product.title}}</h6>
+  		<div class="product_price">
+    		<span class="price">{{product.price /100}}€</span>
+ 		</div>
+	</div>
+</div>

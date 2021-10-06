@@ -1,0 +1,153 @@
+<div class="row position-relative">
+	<div class="col-12" style="padding: 0;">
+		<!-- DARK NAV REGISTER CONNECTION -->
+		<nav class="navbar navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{path ('home')}}"><img src="{{ asset('images/logo/logo_small.png') }}" 
+						alt="A.C Beauty"></a>
+				<div class="d-flex">
+					{% if app.user %}
+					<p class="white_text my-auto mr-5"><b>Utilisateur : </b>{{app.user.email}}</p>
+					{% endif %}
+
+					{% if app.user%}
+					<a class="nav-link white_text " href="{{ path('account') }}"> <i class="fas fa-user"></i>
+						Mon
+						compte</a><br />
+					<a class="nav-link white_text" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i>
+						Se
+						déconnecter</a><br />
+					{% else %}
+
+					<a class="nav-link white_text text-right text-md-right" href="{{ path('app_login') }}"><i
+							class="far fa-user"></i><span> Se
+							connecter</span></a><br>
+					<a class="nav-link white_text text-right text-md-right" href="{{ path('register') }}"><i
+							class="fas fa-sign-in-alt "></i><span>
+							S'inscrire</span></a><br />
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+
+		<!--NAV AS LINKS -->
+		<nav id="nav2" class="navbar navbar-expand-lg navbar-light nav justify-content-end mb-2">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse nav justify-content-end" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active mr-3">
+						<a class="nav-link" href="{{path ('home')}}">Home</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Categories
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="nav-link" href="/categorie/tissage">Tissages</a>
+							<a class="nav-link" href="/categorie/perruque">Perruques</a>
+						</div>
+					</li>
+
+					<li class="nav-item active mr-2">
+						<a class="nav-link" href={{ path ('products')}}>Tout voir</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Galerie
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="nav-link" href="{{path ('pictures_gallery')}}">Galerie photos</a>
+							<a class="nav-link" href="{{path ('videos_gallery')}}">Galerie videos</a>
+						</div>
+					</li>
+					<li class="nav-item active mr-3">
+						<a class="nav-link" href="{{ path ('contact')}}">Contact</a>
+					</li>
+
+
+					<!-- DROPDOMWN HOVER ICON CART -->
+					<li class="dropdown cart_dropdown mt-2">
+					<a href={{ path ("cart")}} class="card-link"><i
+								class="fas fa-shopping-cart mr-1 "></i>
+								<span class="cart_count">
+								<!-- quantité element panier -->
+								{% set quantity = 0 %}
+								{# <pre>
+									{{ dump(array) }}
+								</pre> #}
+								{% for element in app.session.get('panierData') %}
+								{% set quantity = quantity + element.quantity %}
+								{% endfor %}
+								{{quantity}}
+							</span>
+					</a>
+						<div class="cart_box dropdown-menu dropdown-menu-right ">
+							<ul class="cart_list">
+								{% if app.session.get('panierData') %}
+								{% set subTotal = 0 %}
+								{% for element in app.session.get('panierData') %}
+								{% set subTotal = subTotal + (element.quantity * element.product.price /100) %}
+								<li>
+									<div class="row">
+										{#lien sur image en col-4 #}
+										<div class="col-4">
+											<a href="{{path('product_detail', {'slug': element.product.slug})}}"><img
+													src="../../uploads/{{element.product.media}}"
+													alt="{{element.product.title}}"></a>
+										</div>
+										{# sur col-6 titre quantité X prix #}
+										<div class="col-6">
+											<p>{{element.product.title}}</p>
+											<span class="cart_quantity">{{element.quantity}} <span>x</span> <span
+													class="cart_amount"> <strong>{{(element.product.price
+														/100)|number_format(2,
+														',', '.')}}</strong></span>€</span>
+										</div>
+										{# sur col-2 icone pour supprimer le produit du panier#}
+										<div class="col-2">
+											<a href="{{path ('remove-to-cart', {'id': element.product.id})}}"
+												class="item_remove"><i class="fas fa-times"></i></a>
+										</div>
+									</div>
+								</li>
+								<hr>
+								{% endfor %}
+								{% else %}
+								<li class="text-center"><strong> Panier vide!</strong></li>
+								{% endif %}
+
+							</ul>
+							{% if app.session.get('panierData') %}
+							{# footer de l'élément #}
+							<div class="cart_footer">
+								{# sous-total #}
+								<div class="cart_total-dropdown d-flex">
+									<p class="cart_total"><strong>Sous-total:</strong></p>
+									<p><span class="cart_price"><strong>{{subTotal|number_format(2,
+												',', '.')}}€</strong>
+								</div>
+								{# bouton voir panier et valider panier #}
+								<div class="cart_buttons ml-4">
+									<a href={{ path ("cart")}} class="btn btn-dark view-cart">Voir
+										mon panier</a>
+									<a href="{{path ('order')}}" class="btn btn-success rounded-0 checkout">Valider le
+										panier</a>
+								</div>
+							</div>
+
+							{% endif %}
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</div>
+<!-- <pre>
+	{{ dump(app) }}
+</pre> -->

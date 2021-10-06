@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+{% block body %}
+{# {{dump()}} #}
+
+<div class="container">
+    <div class="row ">
+
+
+        <div class="card-group">
+
+            {% for perruque in perruques %}
+            <div class="col-md-4 col-sm-6 mt-3">
+                <div class="card" style="width: 18rem; height: 370px;">
+                    <a href="{{path('product', {'slug': perruque.slug})}}"><img class="card-img-top"
+                            style="height: 200px;" src="../uploads/{{ perruque.media }} " alt="Card image cap"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{perruque.title}}</h5>
+                        <p class="card-text" style="font-size: 12px;">{{perruque.description}}</p>
+                    </div>
+
+                    <div class="card-body">
+                        <ul class="" style="position: absolute; bottom: 0; width:85%;">
+                            <li class="" style="list-style: none;">
+                                <a href="#" class="card-link">Voir</a>
+                                <a href="{{path('cart-add', {'id': perruque.id} )}}" class="card-link"><i
+                                        class="fas fa-shopping-cart mr-1"></i>Ajouter au panier</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

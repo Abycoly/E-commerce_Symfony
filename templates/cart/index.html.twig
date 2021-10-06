@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-5 mb-3" style="background-color: beige;">
+	<h2 class="text-center">Mon panier</h2>
+</div>
+
+{% if items | length > 0 %}
+
+<div class="container-fluid p-5">
+	<div class="row">
+		<div class="col-lg-9 col-md-12">
+			<table class="table mt-3">
+				<thead>
+					<tr>
+						<th>Produit</th>
+						<th></th>
+						<th>Prix</th>
+						<th>Quantité</th>
+						<th>Total</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% set total = null %}
+					{% set error_qty = false %}
+					{% for item in items %}
+					<tr>
+						<td>
+							<img src="/uploads/{{item.product.media}}" alt="{{item.product.title}}"
+								style="width:75px; height:75px;"><br>
+						</td>
+						<td>{{item.product.title}}</td>
+						<td>{{( item.product.price /100)|number_format(2, ',', '.')}}€</td>
+						<td>
+							<a href="{{path ('decrease-to-cart', {'id': item.product.id}) }}"
+								alt="supprimer une quantité produit">
+								<i class="fas fa-minus-circle" style="color: grey;"></i>
+							</a>
+							{{item.quantity}}
+							{% if item.quantity < item.product.quantity %} <a
+								href="{{path ('cart-add', {'id': item.product.id}) }}"
+								alt="ajouter une quantité produit">
+								<i class="fas fa-plus-circle" style="color: grey;"></i>
+								</a>
+								{% endif %}
+						</td>
+
+						<td>{{(( item.product.price * item.quantity) / 100)|number_format(2, ',', '.') }}€</td>
+						<td>
+							<a href={{ path('remove-to-cart', {'id': item.product.id} )}} class=" btn  btn-sm">
+								<i class="fas fa-times" style="color: red;"></i>
+							</a>
+						</td>
+					</tr>
+					{% set total = total + ( item.product.price * item.quantity) %}
+					{% endfor %}
+
+				</tbody>
+			</table>
+			<a href="{{path ('order')}}">
+				<button class="btn btn-success bg-dark btn-block w-75 mx-auto my-3">Valider mon panier</button>
+			</a>
+
+		</div>
+		<div class="col-lg-3 col-md-12 order-style mt-5 py-4" style="max-height: 200px;">
+			<h4 class="text-center">Récapitulatif de panier</h4>
+			<hr>
+
+			<div class="text-right float-right">
+				<b>Nombre de produit :
+				</b>
+				{{items|length}}<br>
+				<b>Total de mon panier :
+				</b>
+				{{ (total / 100 )|number_format(2, ',', '.')}}€
+				<br><hr>
+				<a href="{{path ("cart-remove")}}">Vider le panier</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+<hr>
+<div class="container my-auto" style="border: 1px solid lightgrey; height: 400px; ">
+
+	<h1 class="text-center">Surprise, c'est vide !</h1>
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}

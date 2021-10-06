@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A.C Beauty
+{% endblock %}
+
+{% block body %}
+
+  {# CAROUSEL #}
+  {% include "partials/carousel.html.twig" %}
+  {# END CAROUSEL #}
+
+  {% for message in app.flashes('notice') %}
+    <div class="alert alert-info text-center w-25 mx-auto mt-4">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endfor %}
+  {# EXCLUSIFS PRODUCTS #}
+  <div class="section small_pt pb_70">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="heading_s1 text-center mt-5">
+            <h2>Produits exclusifs</h2>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container col-12">
+          <div class="tab-style1 mb-3">
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="true">Les Nouveautés</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="sellers-tab" data-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Meilleurs ventes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="specialoffer-tab" data-toggle="tab" href="#specialoffer" role="tab" aria-controls="specialoffer" aria-selected="false">Offres Spéciales</a>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+              <div class="row product-container shop_container mx-auto">
+                {% for product in new_arrival %}
+                  <div class="col-lg-3 col-md-6">
+                    {% include "partials/product.html.twig" %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
+              <div class="row product-container shop_container" id="meilleurVentes">
+                {% for product in best_products %}
+                  <div class="col-lg-3 col-md-6">
+                    {% include "partials/product.html.twig" %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="tab-pane fade" id="specialoffer" role="tabpanel" aria-labelledby="specialoffer-tab">
+              <div class="row product-container shop_container">
+                {% for product in specialOffer %}
+                  <div class="col-lg-3 col-md-6">
+                    {% include "partials/product.html.twig" %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {# END EXCLUSIF PRODUCTS #}
+
+  {# CHARTRE #}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="heading_s1 text-center mt-5">
+        <h2>Notre charte pour vous embellir</h2>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row no-gutters bg position-relative">
+      <div class="col-md-6 p-md-4">
+        <img src="{{ asset('images/beauty-salon-4043096_1920.jpg')}}" class="w-100 h-75 bg-light-gray" alt="...">
+      </div>
+      <div class="col-md-6 position-static p-4 pl-md-0 my-auto">
+        <h5 class="mt-0">Columns with stretched link</h5>
+        <p class="my-auto">Another instance of placeholder content for this other custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.
+        </p>
+      </div>
+    </div>
+    <div class="row no-gutters  position-relative">
+      <div class="col-md-6  p-md-4 my-auto">
+        <h5 class="mt-0">Columns with stretched link</h5>
+        <p>Another instance of placeholder content for this other custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.
+        </p>
+      </div>
+      <div class="col-md-6 position-static p-4 pl-md-0">
+        <img src="{{ asset('images/people-3104635_1920.jpg')}}" class="" alt="...">
+      </div>
+    </div>
+    <br>
+    <div class="row no-gutters bg position-relative">
+      <div class="col-md-6 mb-md-0 p-md-4">
+        <img src="{{ asset('images/pink-hair-1450045_1920.jpg')}}" class="w-100 h-100" alt="...">
+      </div>
+      <div class="col-md-6 position-static p-4 pl-md-0 my-auto">
+        <h5 class="mt-0">Columns with stretched link</h5>
+        <p>Another instance of placeholder content for this other custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.
+        </p>
+      </div>
+    </div>
+  </div>
+  {# END CHARTRE #}
+
+  {# MAP #}
+  <div class="container-fluid mt-5">
+    <h1 class="text-center ">La boutique AC. Beauty</h1>
+    <hr>
+    <div class="row">
+      <div class="col-lg-8">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.48896749673!2d2.3130767152020097!3d48.86795450798799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fce39c7f273%3A0xa52a9450f0b5eaab!2s10%20Av.%20des%20Champs-%C3%89lys%C3%A9es%2C%2075008%20Paris!5e0!3m2!1sfr!2sfr!4v1617184577936!5m2!1sfr!2sfr" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="col-lg-4">
+        <strong>A.C Beauty</strong>
+        <hr>
+        06 14 08 73 38
+        <br>
+        10 avenue des champs
+        <br>
+        75010 Paris
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+  {# modal #}
+  <div id="ma_modal">
+    <div id="modal-image" class="modal-image">
+      <i class="far fa-times-circle"></i><img src="../../images/people-2561845_1920.jpg" alt="" class="mx-auto">
+      <div>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  {# fin test #}
+  {# END MAP #}
+{% endblock %}
