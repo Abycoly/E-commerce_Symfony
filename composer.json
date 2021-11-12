@@ -47,10 +47,8 @@
         "symfony/yaml": "5.2.*",
         "symfonycasts/reset-password-bundle": "^1.4",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
-    },
-    "require-dev": {
-        "symfony/browser-kit": "^5.2",
+        "twig/twig": "^2.12|^3.0",
+		"symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
         "symfony/debug-bundle": "^5.2",
         "symfony/maker-bundle": "^1.0",
@@ -59,6 +57,7 @@
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2"
     },
+   
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
