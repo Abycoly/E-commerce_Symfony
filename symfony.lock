@@ -29,6 +29,9 @@
     "doctrine/dbal": {
         "version": "2.12.1"
     },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.0",
         "recipe": {
@@ -108,6 +111,9 @@
     "guzzlehttp/psr7": {
         "version": "1.8.1"
     },
+    "hamcrest/hamcrest-php": {
+        "version": "v2.0.1"
+    },
     "knplabs/knp-components": {
         "version": "v3.0.0"
     },
@@ -125,6 +131,9 @@
     },
     "mailjet/mailjet-apiv3-php": {
         "version": "v1.5.1"
+    },
+    "mockery/mockery": {
+        "version": "1.4.4"
     },
     "monolog/monolog": {
         "version": "2.2.0"
@@ -151,6 +160,9 @@
         "version": "1.0.0"
     },
     "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
         "version": "1.0.1"
     },
     "psr/http-message": {
@@ -380,6 +392,9 @@
     "symfony/orm-pack": {
         "version": "v2.1.0"
     },
+    "symfony/password-hasher": {
+        "version": "v5.3.8"
+    },
     "symfony/phpunit-bridge": {
         "version": "4.3",
         "recipe": {
@@ -415,6 +430,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
+    },
+    "symfony/polyfill-php81": {
+        "version": "v1.23.0"
     },
     "symfony/polyfill-uuid": {
         "version": "v1.22.0"

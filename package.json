@@ -1,11 +1,11 @@
 {
     "devDependencies": {
-        "@symfony/stimulus-bridge": "^2.0.0",
-        "@symfony/webpack-encore": "^1.0.0",
-        "core-js": "^3.0.0",
-        "regenerator-runtime": "^0.13.2",
+        "@symfony/stimulus-bridge": "^2.1.0",
+        "@symfony/webpack-encore": "^1.6.1",
+        "core-js": "^3.19.1",
+        "regenerator-runtime": "^0.13.9",
         "stimulus": "^2.0.0",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.14.1"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -16,6 +16,6 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "nouislider": "^14.6.3"
+        "nouislider": "^14.7.0"
     }
 }
