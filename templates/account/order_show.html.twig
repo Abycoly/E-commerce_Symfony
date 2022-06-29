@@ -8,79 +8,80 @@
 {# {{ dump() }} #}
 {% include "account/navAccount.html.twig" %}
 
-<div class="col-lg-8 col-md-12 order-style mt-4">
+<div class="col-lg-9 col-md-12 order-style mt-4">
 
 	<h3 style="visibility: visible; text-align:center; font-size: 1.85rem ; margin-top: 20px;">Ma Commande
 		<small>{{order.reference}}</small>
 	</h3>
-
-	<a href="{{path('account_order')}}" class="text-center">Retour à la liste des commandes</a>
-	<br><br>
-
-
-	<div class="row show-order pb-3 ">
-		<div class="col-md-12 col-8 mt-3">
-			<strong>Status de la commande :
-			</strong>
-			{% if order.state == 1 %}
-			Paiement accepté
-			{% elseif order.state == 2 %}
-			Préparation en cours
-			{% elseif order.state == 3 %}
-			Livraison en cours
-			{% endif %}
-			<br>
-			<strong>Commande passée le :
-			</strong>
-			{{order.createdAt|date("d/m/Y")}}
-			<br>
-			<strong>Référence de ma commande :
-			</strong>
-			<small>{{order.reference}}</small><br>
-			<strong>Transporteur choisi :</strong>
-			{{order.carrierName}}
-			<br><br>
-		</div>
-		<div class="col-md-12 col-4">
-			<div class="">
-				<strong>Sous Total :
-				</strong>{{ (order.getTotal / 100)|number_format(2, ',', '.')}}€<br>
-				<strong>Livraison :
-				</strong>{{ (order.carrierPrice /100)|number_format(2, ',', '.')}}€<br>
-				<strong>Total :
-				</strong>{{ ((order.getTotal / 100) + (order.carrierPrice / 100))|number_format(2, ',', '.')}}€<br>
+	<div class="d-flex justify-content-center my-4">
+		<a href="{{path('account_order')}}" class="mr-3 btn btn-light"><i class="fas fa-arrow-left mr-2"></i>Retour à la
+			liste des commandes</a>
+		<a href="" class="btn btn-light" onclick="printDiv()"><i class="fas fa-print mr-2"></i>Imprimer une facture</a>
+	</div>
+	<div id="order-content">
+		<div class="row show-order pb-3 ">
+			<div class="col-md-12 col-8 mt-3">
+				<strong>Status de la commande :
+				</strong>
+				{% if order.state == 1 %}
+				Paiement accepté
+				{% elseif order.state == 2 %}
+				Préparation en cours
+				{% elseif order.state == 3 %}
+				Livraison en cours
+				{% endif %}
+				<br>
+				<strong>Commande passée le :
+				</strong>
+				{{order.createdAt|date("d/m/Y")}}
+				<br>
+				<strong>Référence de ma commande :
+				</strong>
+				<small>{{order.reference}}</small><br>
+				<strong>Transporteur choisi :</strong>
+				{{order.carrierName}}
+				<br><br>
+			</div>
+			<div class="col-md-12 col-4">
+				<div class="">
+					<strong>Sous Total :
+					</strong>{{ (order.getTotal / 100)|number_format(2, ',', '.')}}€<br>
+					<strong>Livraison :
+					</strong>{{ (order.carrierPrice /100)|number_format(2, ',', '.')}}€<br>
+					<strong>Total :
+					</strong>{{ ((order.getTotal / 100) + (order.carrierPrice / 100))|number_format(2, ',', '.')}}€<br>
+				</div>
 			</div>
 		</div>
+		<br>
+		<strong>Détails de la commande:
+		</strong>
+
+		<table class="table mt-5">
+			<thead>
+				<tr>
+
+					<th scope="col">Produit</th>
+					<th scope="col">Quantité</th>
+					<th scope="col">Prix Unitaire</th>
+					<th scope="col">Total</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in order.orderDetails %}
+				{# {{ dump(product)}} #}
+				<tr class="tr-table-order-product">
+					<td>{{product.product}}</td>
+					<td>x{{product.quantity}}</td>
+					<td>{{(product.price / 100)|number_format(2, ',', '.')}}€</td>
+					<td>{{ (product.total / 100)|number_format(2, ',', '.')}}€</td>
+
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
-	<br>
-	<strong>Détails de la commande:
-	</strong>
-
-	<table class="table mt-5">
-		<thead>
-			<tr>
-
-				<th scope="col">Produit</th>
-				<th scope="col">Quantité</th>
-				<th scope="col">Prix Unitaire</th>
-				<th scope="col">Total</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			{% for product in order.orderDetails %}
-			{# {{ dump(product)}} #}
-			<tr class="tr-table-order-product">
-				<td>{{product.product}}</td>
-				<td>x{{product.quantity}}</td>
-				<td>{{(product.price / 100)|number_format(2, ',', '.')}}€</td>
-				<td>{{ (product.total / 100)|number_format(2, ',', '.')}}€</td>
-
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
 
 
 </div>
@@ -89,4 +90,17 @@
 </div>
 {# fermeture div class container #}
 </div>
+{% endblock %}
+{% block script %}
+<script>
+	function printDiv() {
+		var divContents = document.getElementById("order-content").innerHTML;
+		var a = window.open('', '', 'height=800, width=800');
+		a.document.write('<html>');
+		a.document.write('<body><div style="text-align: center;"><img src="{{ asset("images/header_acbeauty.png")}}" width=200/></div><h1 style="text-align: center;">Facture {{order.reference}} </h1><br><hr><br>');
+		a.document.write(divContents);
+		a.document.write('</body></html>');
+		a.document.close();
+		a.print();
+	}</script>
 {% endblock %}
